@@ -1,0 +1,25 @@
+---
+layout: default
+---
+
+<div class="posts">
+  {% for post in site.posts %}
+    <article class="post">
+      <div class="tag-container">
+          {% for category in post.categories %}
+          <div class="tag">{{ category }}</div>
+          {% endfor %}
+      </div>
+      <h3><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h3>
+    
+      <div class="date">
+          {{ post.date | date: "%B %e, %Y" }}
+      </div>
+
+      <div class="entry">
+        {{ post.excerpt | strip_html | truncatewords: 20, '...'}}
+      </div>
+
+    </article>
+  {% endfor %}
+</div>

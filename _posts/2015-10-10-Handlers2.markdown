@@ -1,0 +1,80 @@
+---
+layout: post
+title:  "A Deeper Look at Handlers"
+categories: [architecture, swift]
+---
+Now that I've spent quite a bit more time implementing a "handler" based development approach, I'm finding that there's quite a bit I like about it.  I still have some frustrations with it, and some unresolved questions, but overall I think this approach has some serious merits that warrant consideration as an Architecture approach to handling complex dependencies.
+
+To give some perspective, I've been using this approach to construct a transport layer client for a messaging service.  The service is not simple, with concepts of multiple messaging types, rooms, user, orgs, members, a "mentioning" system, markdown-like parsing, etc.  It's responsible for communicating with a TL layer (via a socket), persisting data, managing sync, updates, etc.  As you can imagine, there is _a lot_ of interdependencies doing on here, many of which can only resolve asynchronously via network calls.  For example, A `Member` is a `User` and and an `Org`.  So before you can have one, you must ensure you have the others.  This results in a lot of what I call "asynchronous interdependent behavior" among the various machinations in the code.  The reason I turned to a handler-based approach was that I found that these interdependencies were so numerous and varied that attempting a protocol based approach would end in a proliferation of single-use protocols.   Moreover,  Swift has limitation on protocols that I'm not quite pleased with.  This is not to say I don't use protocols.  The TL client exposes itself to the rest of the app (it's a module) via several protocols.  But internally, that was not the right approach.
+
+What I've realized is that this approach is extremely useful to a specific set of requirements, but the approach is _not_ useful in all situations.  To me, this is a new "tool" I've learned... a conceptual model and practical approach useful to a circumstances and requirements I've commonly come into contact with.  It's an architectural model useful to solve certain problems but definitely not all problems.
+
+
+<!--more-->
+### Centralized Dependency Management
+This has turned out to be a fantastic side benefit to using handlers: you've gotta _assign_ them.  In my case, this all happens when the TL client is created.  The benefit here is that there is a single place to look to find where all the interdependencies occur.  It is, quite literally, a very long running sequence of initializations for each object that look something like this:
+
+    tlCoordinator = TLRequestCoordinator(
+      adapter: adapter,
+      transportLayer: tl,
+      membershipHandler: memberCoordinator.submitMembers,
+      messageHandler: messageCoordinator.updateMessages)
+      
+Something to note: `memberCoordinator` does not have a property called `submitMembers` nor `messageCoordinator` an `updateMessages` properties.  Those are actual methods defined on that class.  I'm directly passing the function of one class as the handler of another [^1].  I like this, because it makes the dependency extremely clear.  But more importantly, this is all in a single constructor-type (almost a kind of dependency injector) class... a lynch pin that not only holds everything together, but also give a _single place to see all interdependencies_ in the module.  That's a big deal and so long as you know where to look, it can make understanding the codebase all that much easier.
+
+### Explicit Memory Management
+Many of you probably noticed that passing a function of one class into another object as a _stored variable_  can actually be considered dangerous... and it's not even required here.  The prior example could be easily re-written as:
+
+    tlCoordinator = TLRequestCoordinator(
+      adapter: adapter,
+      transportLayer: tl,
+      membershipHandler: { [weak memberCoordinator] in memberCoordinator.submitMembers($0) },
+      messageHandler: { [weak messageCoordinator] in messageCoordinator.updateMessages($0) } ) 
+
+This is a safer approach, albeit not always necessary.  If your collaborating objects all depend on each other then you need some central object object to maintain them.  Otherwise, you end up with incorrect memory references, cycles or disappearing objects (cause no one references them strongly).  
+
+But notice that the _concept_ of memory management isn't even present in the collaborating objects.  It's not their job.  They're declaring a _behavioral dependency_ and nothing more.  They're not interested in the objects that fulfill their dependency, nor care _if it's even an object_ that fulfills the dependency (it could be a simple closure).  They've essentially delegated the responsibility of memory management to the caller, the one who initializes.  And this allows you to centralize your memory management duties into a central place.
+
+The reason I didn't use closures in the first example is because I didn't need to.  My lynchpin object is the object that constructs the collaboration graph _and_ is responsible for keeping it there by maintaining references to all the collaborating objects.  When it goes away, so do they.  There was no more need to use closures because of this centralized management.
+
+That being said, you have to be careful and, if in doubt, use closures.  While the syntax of passing class methods directly as first class variables is pleasing, it can nonetheless land you into trouble.  This only works for self-contained interdependencies.  Don't pass out objects outside of the graph that hold these kind of references.  Otherwise, your graph could "go away" while someone outside still retains a reference to one of the participants, who now reference a non-existent behavioral dependency (aka: it will crash).  If in doubt, use closures.
+
+### Decomposition of Behavioral Dependencies
+I had a lot of of questions about why I simply didn't use protocols in my design: "Wouldn't it be easier to simply create a protocol here?".  But every time I looked at my _needs_, I realized that protocols would not only **not** be easier, it most certainly would not be simpler.  The problem boiled down to the fact that each collaborating object had varied and specific needs that could only be fulfilled by several _other_ objects.  I had a very real conflict between the logical breakdown of component responsibilities, and the dependencies needed to create a functioning client.  
+
+To clarify this, imagine all this is in a single, very large object which is affectionately called "The Client".  The Client does a lot of stuff, and there's several dozen methods, and "sub" methods in the client.  The Client handles everything related: Members, Users, Orgs, Rooms, Messages, etc.  When it "sees" it needs a set of Member objects, for example, it calls other methods in the class that retrieve the necessary users and orgs so that it can construct the Member objects.
+
+But _logically_, it makes sense to decompose the implementation into smaller, SRP objects.  A single object for managing Members, a single object for managing Users, and so on.  But as soon as you try to do this, you realize there are a lot of "strings" connecting each of these objects.  Members requires User and Orgs, which themselves have their own dependencies.  How do you decompose while still handling all of the stringy dependencies that connect them?
+
+A conventional approach to solving this is to simply pass each of the respective dependencies in as weak references.  `MemberCoordinator` weakly references the `UserCoordinator`.  This works but it can drastically increase the possible complexity within the codebase.  If `MemberCoordinator` _only_ needs to access one method of `UserCoordinator`, it has instead imported _all_ the behaviors (methods) of `UserCoordinator`.  If you want to understand `MemberCoordinator`, you need to figure out what are the _actual_ dependencies, usually via a string search on the codebase.  Not exactly a great process, and very error prone.  
+
+A protocol could work here instead, and is even much preferred to actually importing a specific object (because you're decoupling).  But do you really want to create 4 separate protocols for a single object's dependency graph?  That might make it even _more_ difficult to understand the codebase, as you now need to search through a multiple protocols and figure out who's actually implementing them.  You also end up with a single object attempting to satisfy a multitude of protocols, many of which are attempting to define the same dependency.  And while you could consolidate many of these protocols, you'd still end up with a ton of "one method" protocols that only serve to make the codebase _harder_ to understand.
+
+This is where the handler based approach really works well.  Each respective object declares their _exact_ dependencies.  `MemberCoordinator` doesn't really care if `UserCoordinator` fulfills it's needs, but it does care that someone give it a `User` object when it provides a `UserId`.  That could be a `UserCoordinator` but it does not need to be.  The benefit here is that you know _exactly_ what the `MemberCoordinator` depends on.  You can see it plainly in either it's variable declarations or, more likely, in the `init`.  
+
+### Unit Testing
+This pattern is a _god send_ for Unit Testing.  All of an object's dependencies are extremely easy to mock:  simply pass in a closure that does what you need it to.  It becomes easy to isolate specific behavioral patterns by using static closures for all but one of the dependencies, and then varying the behavior of that one dependency to suit your test.  The behavior of that dependency can even easily vary within a single test.
+
+This sort of flexibility is hard to duplicate using mocks in Swift, where I would end up creating multiple "mock" objects conforming to a single protocol in order to vary the behavior.  You could try creating configurable mocks (which is what many 3rd party Unit Testing frameworks do), but that adds a level of complexity that actually increases the likely hood of failures within the mocks themselves, or worse yet: Passing Unit Tests that should have failed because the mock didn't perform as expected.  You practically need Unit Tests for the Unit Tests... not ideal (notice that OCMock, Kiwi and other objc frameworks have their own Unit Tests... point).  Passing in handlers drastically simplifies how I test the objects, and when it comes to Unit Tests, the simpler the better.
+
+### Readability
+I've found that I've gotten complaints from other developers that using this pattern creates code that's difficult to understand.  I disagree.  Once you understand the pattern, the code is actually easier to understand than many other patterns (IMO).  _But_ it's not a pattern that many developers are familiar with.  It dips a little too much into the functional, and because of this it's easy to get push backs from other devs that it's too difficult.  But really, what they mean is that it's too _different_ from what they're used to.  This is going to happen for anything outside the "norm".  It's not necessarily a reason to avoid this pattern, but it is something you should take into consideration.  Other developers need to read your code.  You would be well advised to document the hell out of your codebase.  Make some graphs, show the architecture and make is easier for other developers to "grasp" what you're doing.
+
+### Discussion
+There are other benefits to this approach but, like all approaches it is more useful is certain situations than others.  So far, I've found two specific situations where this approach is useful:
+
+1. When a certain component needs highly configurable behavior.  A good example is a Cache, where it may require multiple sources, configurable expiry, refreshing etc.  Using handlers allows you to attach behavior without requiring it be contained in an object, which may not always make sense.
+2. When you have multiple objects that require a high amount of interdependent coordination.  Handlers allow you to disassociate the behavioral dependencies, delegating the actual assigning of interdependent behavior to another component, a coordinator.
+
+While I've found that this approach makes it easy to Unit Test, I don't really consider that a "situation" because, you know, you should probably be Unit Testing your code anyway. 
+
+When the situation does call for it, this approach can help quite nicely.  It works well to manage a plethora of interdependent behavior indicative of internal "machinery".  Often this machinery needs to be hidden from the rest of the world, but be highly cooperative internally.  It also works well to produce highly configurable independent components, like a Cache.  And I've found it makes it easy to Unit Test.
+
+I _have_ used this pattern to get around some limitations with Swift protocols, allowing me to define generic handlers where I cannot define a generic protocol.  But overall that's just a bandage over an inadequacy in the language and nothing against the use of protocols.  If you find yourself fulfilling all over your handlers with the same object's functionality, you may want to reconsider using a protocol instead.  Always judge your design patterns against the situation at hand.  It's easy to get caught up in the newest reemergent fad that promises to be a solution to all your problems.  But they're just tools.  Trying to use handlers, or reactive, or functional or whatever other paradigm for _all_ your needs is like trying to build a house with a single tool.  Sure, the hammer is useful and it solves a lot of problems but you probably shouldn't build an entire house with only a hammer.  Engineering software is the same way.  There a lot of tools and part of becoming a good software engineer is learning which tools are best for the job.
+
+  
+
+
+
+[^1]: Before you have an aneurysm, there are some obvious memory considerations here.  I _must_ make certain that for so long as `tlCoordinator` exists, so does the objects it depends on.  More on this later.
+

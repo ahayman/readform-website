@@ -1,0 +1,58 @@
+---
+layout: default
+---
+
+<div class="posts">
+    <h1><small>{{ page.title }}</small></h1>
+
+    {% assign posts=site.categories[page.tag] %}
+    <h3>{% if posts %}{{ posts.size }}{% else %}0{% endif %} Posts</h3>
+
+    {% unless posts %}
+        <h3>Nothing Yet</h3>
+        <div class="entry">
+            <p>
+            Ooops!  It looks like I haven't written any posts in this category yet.
+            </p>    
+            <p>The most likely explanation is that I'm lazy and far too optimistic about how prolific I can write.  
+                However, I <i>did</i> create the category, so I obviously intend to write something about the subject... someday.</p>
+            <p>Stay tuned?</p>
+        </div>
+    {% endunless %}
+
+    {% for post in posts %}
+    <article class="post">
+    
+        {% if post.categories.size > 1 %}
+            <div class="tag-container">
+                {% for tag in post.categories %}
+                    {%if tag != page.tag %}
+                        <div class="tag">{{ tag }}</div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        {% endif %}
+    
+        <h1><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h1>
+
+        {% if post.image %}
+            <img class="thumbnail" src="{{ post.image }}" />
+        {% endif %}
+
+        <div class="date">
+            {{ post.date | date: "%B %e, %Y" }}
+        </div>
+    
+
+      {% assign excerpt = post.excerpt | split: '<!--start-->' | last %}
+      <div class="entry">
+        {{ excerpt }}
+      </div>
+
+      {% if excerpt != post.content %}
+        <a href="{{ site.baseurl }}{{ post.url }}" class="read-more">Read More</a>
+      {% endif %}
+
+    </article>
+    {% endfor %}
+</div>

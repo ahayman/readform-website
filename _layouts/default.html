@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+
+
+<html>
+  <head>
+    {% include analytics.html %} 
+    <script type="text/javascript" src="/scripts/jquery.min.js"></script>
+    <script type="text/javascript" src="/scripts/bigfoot.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/scripts/bigfoot-default.css">
+    <script type="text/javascript"> $.bigfoot(); </script>
+
+    <script>
+        function updateWindowHeight() {
+            let vh = window.innerHeight * 0.01;
+            document.documentElement.style.setProperty('--vh', `${vh}px`);
+        }
+
+        const theme = localStorage.getItem('theme');
+        if (theme === "dark") {
+            document.documentElement.setAttribute('data-theme', 'dark');
+        }
+
+        window.addEventListener('resize', updateWindowHeight);
+    </script>
+
+    <title>
+        {% if page.title %}{{ page.title }} – {% endif %}
+        {{ site.title }}
+    </title>
+    {% include meta.html %}
+
+    <!--[if lt IE 9]>
+      <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/style.css" />
+    <link rel="alternate" type="application/rss+xml" title="{{ site.name }} - {{ site.description }}" href="{{ site.baseurl }}/feed.xml" />
+
+    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+  </head>
+
+<body>
+    <div class="page-layout">
+        <div class="nav-container">
+            <header class="header">
+                    <button id="theme-toggle" onclick="modeSwitcher()"></button>
+                <div class="site-info">
+                    <a href="{{ site.baseurl }}/" class="site-avatar"><img src="/assets/images/logo.png" /></a>
+                    <p class="site-name"><a href="{{ site.baseurl }}/">{{ site.title }}</a></p>
+                    <p class="site-description">{{ site.description }}</p>
+                </div>
+
+                <nav>
+                    <a href="{{ site.baseurl }}/general">General</a>
+                    <a href="{{ site.baseurl }}/architecture">Architecture & Design</a>
+                    <a href="{{ site.baseurl }}/swift">Swift</a>
+                    <a href="{{ site.baseurl }}/kotlin">Kotlin</a>
+                    <a href="{{ site.baseurl }}/typescript">Typescript</a>
+                    <a href="{{ site.baseurl }}/ios">iOS</a>
+                    <a href="{{ site.baseurl }}/android">Android</a>
+                    <a href="{{ site.baseurl }}/react-native">React Native</a>
+                    <div class="nav-social">
+                        <div class="nav-social-icons">
+                            {% include svg-icons.html %}
+                        </div>
+                        <a href="{{ site.baseurl }}/archive">Archive</a>
+                    </div>
+                </nav>
+
+            </header>
+        </div>
+
+        <div class="content-layout" id="scroller">
+            <div id="main" role="main" class="container">
+                {{ content }}
+            </div>
+
+            <div class="wrapper-footer">
+                <footer class="footer">
+                    {% include svg-icons.html %}
+                </footer>
+            </div>
+        </div>
+    </div>
+
+  </body>
+  <script>
+
+        const userPrefers = getComputedStyle(document.documentElement).getPropertyValue('content');
+
+        if (theme === "dark") {
+            document.getElementById("theme-toggle").innerHTML = "Dark Mode";
+        } else if (theme === "light") {
+            document.getElementById("theme-toggle").innerHTML = "Light Mode";
+        } else if (userPrefers === "dark") {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            window.localStorage.setItem('theme', 'dark');
+            document.getElementById("theme-toggle").innerHTML = "Dark Mode";
+        } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            window.localStorage.setItem('theme', 'dark');
+            document.getElementById("theme-toggle").innerHTML = "Dark Mode";
+        } else {
+            document.documentElement.setAttribute('data-theme', 'light');
+            window.localStorage.setItem('theme', 'light');
+            document.getElementById("theme-toggle").innerHTML = "Light Mode";
+        }
+
+        function modeSwitcher() {
+            let currentMode = document.documentElement.getAttribute('data-theme');
+            if (currentMode === "dark") {
+                document.documentElement.setAttribute('data-theme', 'light');
+                window.localStorage.setItem('theme', 'light');
+                document.getElementById("theme-toggle").innerHTML = "Light Mode";
+            } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                window.localStorage.setItem('theme', 'dark');
+                document.getElementById("theme-toggle").innerHTML = "Dark Mode";
+            }
+        }
+
+        updateWindowHeight()
+  </script>
+</html>

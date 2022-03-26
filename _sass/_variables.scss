@@ -1,0 +1,53 @@
+//
+// VARIABLES
+//
+
+
+// Font stacks
+$helvetica: Helvetica, Arial, sans-serif;
+$helveticaNeue: "Helvetica Neue", Helvetica, Arial, sans-serif;
+$georgia: Georgia, serif;
+
+html, html[data-theme="light"] {
+
+  // Colors
+    --color-link: rgb(33, 71, 109);
+    --color-tag: rgb(103, 164, 239);
+    --color-nav-background: #dedede;
+  
+    --color-standard-text: #000;
+    --color-heading: #222;
+    --color-body: #333;
+    --color-subText: #666;
+    --color-select: #eee;
+    --color-background: #fff;
+    --color-button: rgb(149, 182, 222);
+    --color-quote-bar: rgb(172, 61, 61);
+    --color-quote-text: rgb(58, 58, 58);
+  }
+  
+  html[data-theme="dark"] {
+  
+  // Colors
+    --color-link: #4183C4;
+    --color-tag: rgb(60, 105, 160);
+    --color-nav-background: #111;
+  
+    --color-standard-text: #eee;
+    --color-heading: #ddd;
+    --color-body: #bbb;
+    --color-subText: #777;
+    --color-select: #444;
+    --color-background: #222;
+    --color-button: rgb(48, 70, 91);
+    --color-quote-bar: rgb(172, 61, 61);
+    --color-quote-text: rgb(206, 206, 206);
+  }
+
+
+// Mobile breakpoints
+@mixin mobile {
+  @media screen and (max-width: 640px) {
+    @content;
+  }
+}
