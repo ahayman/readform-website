@@ -43,27 +43,24 @@
     <div class="page-layout">
         <div class="nav-container">
             <header class="header">
-                    <button id="theme-toggle" onclick="modeSwitcher()"></button>
+                <div id="theme-toggle" onclick="modeSwitcher()"></div>
                 <div class="site-info">
-                    <a href="{{ site.baseurl }}/" class="site-avatar"><img src="/assets/images/logo.png" /></a>
-                    <p class="site-name"><a href="{{ site.baseurl }}/">{{ site.title }}</a></p>
+                    <a href="{{ site.baseurl }}/" class="site-logo" />
+                    <p class="site-name"><a href="{{ site.baseurl }}/"></a></p>
                     <p class="site-description">{{ site.description }}</p>
                 </div>
 
                 <nav>
-                    <a href="{{ site.baseurl }}/general">General</a>
-                    <a href="{{ site.baseurl }}/architecture">Architecture & Design</a>
-                    <a href="{{ site.baseurl }}/swift">Swift</a>
-                    <a href="{{ site.baseurl }}/kotlin">Kotlin</a>
-                    <a href="{{ site.baseurl }}/typescript">Typescript</a>
-                    <a href="{{ site.baseurl }}/ios">iOS</a>
-                    <a href="{{ site.baseurl }}/android">Android</a>
-                    <a href="{{ site.baseurl }}/react-native">React Native</a>
+                    <a href="{{ site.baseurl }}/getReadform">Get Readform</a>
+                    <a href="{{ site.baseurl }}/features">Features</a>
+                    <a href="{{ site.baseurl }}/updates">Updates</a>
+                    <a href="{{ site.baseurl }}/providers">Providers</a>
+                    <a href="{{ site.baseurl }}/disclaimers">Disclaimers</a>
+                    <a href="{{ site.baseurl }}/about">About</a>
                     <div class="nav-social">
                         <div class="nav-social-icons">
                             {% include svg-icons.html %}
                         </div>
-                        <a href="{{ site.baseurl }}/archive">Archive</a>
                     </div>
                 </nav>
 

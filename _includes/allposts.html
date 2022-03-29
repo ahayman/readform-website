@@ -1,0 +1,36 @@
+
+<div class="posts">
+  {% for post in site.posts limit: 20 %}
+    <article class="post">
+
+      <div class="tag-container">
+          {% for category in post.categories %}
+            <a href="/{{ category }}"><div class="tag">{{ category }}</div></a>
+          {% endfor %}
+      </div>
+
+      <h1><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h1>
+    
+      {% if post.image %}
+          <img class="thumbnail" src="{{ post.image }}" />
+      {% endif %}
+
+      <div class="date">
+          {{ post.date | date: "%B %e, %Y" }}
+      </div>
+      {% assign excerpt = post.excerpt | split: '<!--start-->' | last %}
+      <div class="entry">
+        {{ excerpt }}
+      </div>
+
+      {% if excerpt != post.content %}
+        <a href="{{ site.baseurl }}{{ post.url }}" class="read-more">Read More</a>
+      {% endif %}
+    </article>
+  {% endfor %}
+
+  <div class="list-footer">
+    <a href="{{ site.baseurl }}/archive" class="read-more">See All Posts</a>
+  </div>
+  
+</div>

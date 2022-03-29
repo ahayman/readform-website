@@ -11,38 +11,58 @@ $georgia: Georgia, serif;
 html, html[data-theme="light"] {
 
   // Colors
-    --color-link: rgb(33, 71, 109);
-    --color-tag: rgb(103, 164, 239);
-    --color-nav-background: #dedede;
+    --color-link: #114270;
+    --color-tag: #a18b64;
+    --color-nav-background: #ffeacb;
   
-    --color-standard-text: #000;
-    --color-heading: #222;
-    --color-body: #333;
-    --color-subText: #666;
+    --color-standard-text: #322b1e;
+    --color-heading: #8a7f6a;
+    --color-body: #322b1e;
+    --color-subText: #8a7f6a;
     --color-select: #eee;
-    --color-background: #fff;
-    --color-button: rgb(149, 182, 222);
-    --color-quote-bar: rgb(172, 61, 61);
-    --color-quote-text: rgb(58, 58, 58);
-  }
+    --color-background: #f2debf;
+    --color-button: #114270;
+    --color-quote-bar: #782600;
+    --color-quote-text: #8a7f6a;
+
+    .site-logo {
+        background-image: url('/assets/images/logo-dark.png');
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        width: 200pt;
+        height: 50pt;
+    }
+
+}
   
-  html[data-theme="dark"] {
+html[data-theme="dark"] {
   
   // Colors
-    --color-link: #4183C4;
-    --color-tag: rgb(60, 105, 160);
-    --color-nav-background: #111;
+    --color-link: #83a598;
+    --color-tag: #9c6c0e;
+    --color-nav-background: #1d2021;
   
-    --color-standard-text: #eee;
-    --color-heading: #ddd;
-    --color-body: #bbb;
-    --color-subText: #777;
+    --color-standard-text: #fbf1c7;
+    --color-heading: #918967;
+    --color-body: #fbf1c7;
+    --color-subText: #ebdbb2;
     --color-select: #444;
-    --color-background: #222;
-    --color-button: rgb(48, 70, 91);
-    --color-quote-bar: rgb(172, 61, 61);
-    --color-quote-text: rgb(206, 206, 206);
-  }
+    --color-background: #32302f;
+    --color-button: #59590f;
+    --color-quote-bar: #9c6c0e;
+    --color-quote-text: #ebdbb2;
+
+    .site-logo {
+        background-image: url('/assets/images/logo-light.png');
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        width: 200pt;
+        height: 50pt;
+    }
+
+}
 
 
 // Mobile breakpoints

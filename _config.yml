@@ -18,12 +18,12 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: "Functional Gibberish"
+title: "Readform"
 email: aaron@flexile.co
 description: >- # this means to ignore newlines until "baseurl:"
-  It doesn't mean anything, but it works
+  Read it like a book
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "https://functionalgibberish.com" # the base hostname & protocol for your site, e.g. http://example.com
+url: "https://readform.app" # the base hostname & protocol for your site, e.g. http://example.com
 permalink: /:year-:month-:day-:title/
 excerpt_separator: <!--more-->
 
@@ -32,13 +32,13 @@ footer-links:
   email: aaron@flexile.co
   facebook:
   flickr:
-  github: ahayman
+  github:
   instagram:
   linkedin: aaron-hayman
   pinterest:
   rss: rss 
   twitter: 
-  stackoverflow: users/1147934/aaron-hayman
+  stackoverflow:
   youtube: # channel/<your_long_string> or user/<user-name>
   googleplus:
 

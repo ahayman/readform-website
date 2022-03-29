@@ -51,7 +51,7 @@ body {
 
 .container {
   margin: 0 auto;
-  max-width: 740px;
+  max-width: 1024px;
   padding: 0 10px;
   width: 100%;
   display: flex;
@@ -445,10 +445,12 @@ nav {
   border-radius: 4pt;
   text-align: center;
   position: absolute;
+  padding: 5pt;
   bottom: 5px;
-  left: 2px;
+  left: 5px;
   right: auto;
   top: auto;
+  cursor: pointer;
 
   @include mobile {
     bottom: auto;
