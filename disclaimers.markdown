@@ -22,3 +22,8 @@ I am not trying to make money off other's people content.
 
 While I do offer a way to "Tip the Developer" in the app, that is purely for the development of the app itself.
 
+### Not eBooks
+
+I want to make clear that all the series in Readform are _not_ ebooks. They are not something you purchase and own and Readform is not designed (nor can it) replace eBooks release by authors. Even though Readform transforms website into an "eBook-like" format, eBooks are something you purchase and own. They also tend to be edited in a more professional manner than series released on the web.
+
+_If an author releases an eBook, I highly encourage you to purchase it!  It's a great way to support them._
