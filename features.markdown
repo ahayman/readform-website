@@ -100,6 +100,10 @@ For each series, I download and parse the Table of Contents for the series and m
 
 Also includes Cover Art and access to all the Lore/Glossary, if the series has one.
 
+## [Author Notes](#authornotes)
+
+Many authors provide notes before and/or after a chapter. Whenever possible, Readform will parse those notes into a separate section and provide easy access to them from anywhere within the chapter. Simply tap on the notes button for that chapter.
+
 ## [Per Chapter and Full Series Download](#download)
 
 There's nothing so annoying as finding yourself without internet and unable to view the next chapter of your favorite series. So Readform allows you to download chapters in advance, and even the entire series so you can read on without waiting for the plane to land first!

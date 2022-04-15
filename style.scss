@@ -353,7 +353,8 @@ nav {
 .nav-social-icons {
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: flex-end;
+  text-align: center;
+  justify-content: center;
   align-items: center;
   border-bottom: 0.5pt solid var(--color-body);
   border-top: 0.5pt solid var(--color-body);

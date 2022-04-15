@@ -4,7 +4,9 @@ _This app is not released yet!!! All screenshots shown are work-in-progress and 
 
 # Readform
 
-Readform allows you to read serial fiction on the web in an e-book-like format. I'm currently writing the iOS app as a proof of concept and, hopefully, use it to get both authors and providers to .
+Readform allows you to read serial fiction on the web in an e-book-like format. I'm currently writing the iOS app as a proof of concept.
+
+Once I get approval from authors and providers, Readform will be released at a Testflight beta. Assuming that goes well, it'll be released to the app store.
 
 ## Why?
 
@@ -37,6 +39,7 @@ I want to change that.
 - [Searchable Table of Contents](/features#toc) Divided into Books or Volumes (if any)
 - [Integrated Lore system](/features#lore) (if the Series or Provider supports it)
 - [Checks for new content in the background](/features#background)
+- [Dedicated Author Notes](/features#authornotes) easily accessible from within each chapter.
 - [Customizable Reading Experience](/features#reading)
   - Integrated Dictionary
   - Orientation lock
@@ -59,7 +62,7 @@ How is easy: I'm a software developer who loves fiction. Software + Love-of-Fict
 
 _However,_ I have neither the time or the resources to develop an entire platform...yet. So I'm starting with an app first. This means I have to get the data directly from the source: websites.
 
-How? By the power— mwa ha ha —of: [Regular Expressions](https://xkcd.com/208/)
+How? By the power of— mwa ha ha —[Regular Expressions](https://xkcd.com/208/)
 
 Yeah, I'm basically scraping websites and turning them into e-books.
 
