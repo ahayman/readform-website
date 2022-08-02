@@ -44,6 +44,8 @@ Not everyone like reading blocks of text, so Readform provides three paragraph s
 - Standard: Indented paragraphs with an extra line between each paragraph.
 - Compact: Indented paragraphs with no spacing between each paragraph.
 
+Note: Some authors like to put extra lines between their paragraphs. Others put extra lines between sections in a chapter. This does not affect those lines. So in some cases, you may still see extra space between paragraphs even when using a Compact layout.
+
 ### Themes
 
 Readform has a variety of color schemes for both light and dark styles. I'll probably add even more later.
@@ -54,13 +56,20 @@ Readform has a variety of color schemes for both light and dark styles. I'll pro
 
 Lock your device in portrait or landscape. It's a small thing, but really handy when reading in bed.
 
+### Zoomable Chapters
+
+![Zooming Chapter](/assets/images/ReadformZoom.gif)
+
+Tap the center of the screen to zoom out chapter content. Here you can scroll freely within the chapter without affecting your current bookmark. 
+
 ### See only what you want
 
 ![Reading Option](/assets/images/ReadformiPhoneReadingOptions.png)
 
-Tap on the center of the screen to show/hide the "Status bar" and, optionally, the Navigation bar. You can hide everything but the text itself, or show as much info as you want:
+Distraction free reading hides everything in the top bar except for the Chapter Title.  Tap on the Chapter to add everything back, or tap on the center of the screen to zoom out.
 
-- Chapter Title (Yay! No more, "wait, what chapter is this?")
+Also, show/hide:
+
 - Previous/Next Chapter buttons (these buttons always appear at the beginning/end of a chapter)
 - Percent of Chapter Read
 - Current Page of Total Page

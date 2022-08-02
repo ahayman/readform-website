@@ -6,7 +6,7 @@ permalink: /faq
 
 ### How does Readform make money?
 
-It doesn't, not really. I do provide a way to pay me via In-App Purchases, but that's basically just a tip jar. There are no subscriptions and the app itself is free and I intend to keep it that way.
+It doesn't, not really. I do provide a way to pay me via In-App Purchases, but that's just a tip jar. There are no subscriptions and the app itself is free and I intend to keep it that way.
 
 If you're concerned I'll loose interest: Eventually, I'll start release my own web series and Readform will be a critical part of that.
 
@@ -17,11 +17,11 @@ The quickest and easiest way is to simply post your series on one of the [Provid
 If you want to add your series directly to Readform, you can [contact me](mailto: aaron@flexile.co). Before you do, please keep in mind:
 
 - It can take 1-3 days worth of work to add a series.
-- I am happily married, a father of three, and I work a full time job. Take a moment and let that sink in.
+- I am happily married, a father of three, I work a full time job, and I'm writing my own web novel. Take a moment and let that sink in.
 - I will always prioritize adding a Provider over any individual Web Series, for obvious reasons.
 - If your series will work just as well on an already-supported [Provider](/providers), then I'll likely point to one of those [Providers](/providers).
 - I will prioritize Web Series that have a parsable Lore/Glossary, especially if it's extensive and it's clear it facilitates the story. Since no Provider has a dedicated section/page for a Glossary (as far as I can tell, at least), this is something unique to Readform series.
-- I may stop accepting new series if I get too backlogged.  I have no idea how popular Readform will be (if at all), but I am only one person and I'm working on my own writing. 
+- I may stop accepting new series if I get too backlogged.  I have no idea how popular Readform will be (if at all), but I am only one person. 
 
 ### How does Readform affect a site's Analytics?
 
@@ -31,9 +31,7 @@ For each Web Series added, Readform will periodically check the "table of conten
 
 As mentioned above, Readform periodically checks the "table of contents" page for new content. However, it does respect eTags (304 codes). So long as your server supports them (most do), this means instead of downloading the page, Readform will simply use cached data instead.
 
-Chapter downloads are always initiated by the user. Readform does not download new content by default, although I may consider it if I get enough requests.
-
-Also, Readform doesn't download all the other ~shi*~ stuff that browsers do. Most websites have a ton of extra stuff that's downloaded (analytics, scripts, async-loaded data, etc). Readform only downloads the page itself. This makes it much lighter on a website than a normal "user visit" would.
+Also, Readform doesn't download all the other ~sh**~ stuff that browsers do. Most websites have a ton of extra stuff that's downloaded (analytics, scripts, async-loaded data, etc). Readform only downloads the page itself. This makes it much lighter on a website than a normal "user visit" would.
 
 ### How do I delete a Series
 
@@ -54,7 +52,7 @@ There's two ways to do this:
 
 Yeah, they probably are. This is mostly a problem in the litRPG genre, where stat pages are a thing. The data is there, but it's not formatted into a table. I've not figured out how to do that (yet?). 
 
-The problem is that I'm converting each chapter into text that can be broken up into pages, and that process seems to strip tables of their "tableness". For now, if you want to see the tables in all their original glory, I recommend taping on the Chapter Name at the top of the page. This will open up the chapter in the web browser.
+The problem is that I'm converting each chapter into text that can be broken up into pages, and that process seems to strip tables of their "tableness". For now, if you want to see the tables in all their original glory, I recommend opening the Chapter on the web (go to Chapter settings to and tap "View Chapter). This will open up the chapter in the web browser.
 
 ### Some Images don't show up
 

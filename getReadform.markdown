@@ -8,7 +8,7 @@ permalink: /getReadform
 
 **Readform is not available yet**
 
-iOS and iPad development are finished and feature complete. My next step is to request permission to add content to Readform from Authors and Providers. Once I have that permission, I'll release a Beta (Testflight) build for testing. Assuming everything goes well, I'll release the app on the App Store.
+iOS and iPad development are finished and feature complete. My next step is to gauge some of the feedback to the idea of Readform and make sure I'm not pissing anyone off. Then I'll release a Beta (Testflight) build for testing. Assuming everything goes well, I'll release the app on the App Store.
 
 ## Development Status
 
