@@ -18,7 +18,7 @@ I claim no ownership or responsibility over the content of any series in the app
 
 I do not charge for Readform.  While I do offer a way to "Tip the Developer" in the app, that is purely for the development of the app itself.
 
-### Not and eBook
+### Not an eBook
 
 I want to make clear that all the series in Readform are _not_ ebooks. They are not something you purchase and own and Readform is not designed (nor can it) replace eBooks release by authors. Even though Readform transforms website into an "eBook-like" format, eBooks are something you purchase and own. Readform content will disappear if the source it relies on public website data.
 
