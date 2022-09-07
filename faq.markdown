@@ -12,8 +12,6 @@ If you're concerned I'll loose interest: Eventually, I'll start release my own w
 
 ### How do I add my Web Series to Readform
 
-The quickest and easiest way is to simply post your series on one of the [Providers](/providers) that Readform already supports.
-
 If you want to add your series directly to Readform, you can [contact me](mailto: aaron@flexile.co). Before you do, please keep in mind:
 
 - It can take 1-3 days worth of work to add a series.

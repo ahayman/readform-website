@@ -1,6 +1,6 @@
 **Warning!**
 
-_This app is not released yet!!! All screenshots shown are work-in-progress and any Author or Provider shown may not be in the final product._
+_This app is not released!!! All screenshots shown are work-in-progress and for demonstrative purposes only. Any Author or Provider shown may not be in the final product, and I will *never* include works without the author's request and permission._
 
 # Readform
 
@@ -62,15 +62,9 @@ _However,_ I have neither the time or the resources to develop an entire platfor
 
 How? By the power of— mwa ha ha —[Regular Expressions](https://xkcd.com/208/)
 
-Yeah, I'm basically scraping websites and turning them into e-books. This is an odd gray area, though. Technically, all I'm doing is displaying websites in a very specific way to make it easier for readers. Everything I access is public content, I don't claim any of this content as my own, and I'm not charging for the app (nor will I) so there's no legal issues here.
+Yeah, I'm basically scraping websites and turning them into e-books. While this is an odd gray area, I have no intention of absconding with people's hard earned work. I will only include works at the author's request. 
 
-However, I also recognize some authors or providers may not like this. If any author asks me to remove their content, I will. I can think of a few reasons they might:
-
-- The author is selling books separately and fears my app will detract from sales. I personally doubt this would happen. Amazon (and other book providers) are a _marketplace for buying books_. The biggest advantage for using them is exposure to a new market, but it's also about ownership. You buy the book, you own it. It's yours. With Readform, this is not true. You're still reading from a website, even if the format is much more pleasant. If the website goes away (or stuff in the website goes away), that content will go away in Readform the next time it syncs.
-- They may be trying to monetize their content through ads. I will never put ads in my app. Period. I hate them. But I also understand that some authors make money this way and while I disagree with your approach, I will always respect your decision and remove content if asked.
-- Because Readform executes no javascript, it bypasses a lot of analytics software. Unless the server itself is keeping track, Readform readers may not show up in analytics software.  Also, other "features" that depend on javascript (ex: comments) won't show up as well. While Readform does make it easy to visit the website, this is still indirect. I recognize this may be a deal breaker for some, but I honestly don't have a way to address it (yet?). I'm open to suggestions.
-
-My belief is that by making Web Novels easy and pleasant to read, Readform will help authors attract more readers than ever, which should result in more financial support via Patreon, Book sales, etc. I know that I personally would never had read most web novels simple because it's too much of a pain to read a book via a website. With Readform I do, and I support many of those authors now.
+My hope is that by making Web Novels easy and pleasant to read, Readform will help authors attract more readers than ever, which should result in more financial support via Patreon, Book sales, etc. I know that I personally would never had read most web novels simple because it's too much of a pain to read a book via a website.
 
 ## How can I add my Book/Series?
 
